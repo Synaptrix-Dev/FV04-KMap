@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Toaster } from "react-hot-toast";
 
 import LandingPage from './pages/Home/LandingPage'
+import Header from './components/Header';
 
 //* Super Admin Routes
 import ProtectedRoute from './pages/Client/ProtectedRoute'
@@ -12,6 +13,7 @@ import Dashboard from './pages/Client/Dashboard'
 function App() {
   return (
     <>
+      <Header />
       <Routes>
         <Route path='/' element={<LandingPage />} />
 
