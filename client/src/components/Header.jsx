@@ -4,6 +4,7 @@ import logo from '../assets/logoWhite.png'
 
 function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -13,6 +14,10 @@ function Header() {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
 
     return (
         <header className={`flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full fixed top-0 left-0 right-0 border-b border-white/10 shadow-sm transition-all duration-300 ${isScrolled ? 'bg-white/30 backdrop-blur-md' : 'bg-transparent backdrop-blur-sm'}`}>
@@ -27,17 +32,18 @@ function Header() {
                             type="button" 
                             className={`hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border ${isScrolled ? 'border-slate-800/50 text-slate-50' : 'border-white/50 text-slate-50'} hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none`} 
                             id="hs-base-header-collapse" 
-                            aria-expanded="true" 
+                            aria-expanded={isMenuOpen} 
                             aria-controls="hs-base-header" 
                             aria-label="Toggle navigation" 
                             data-hs-collapse="#hs-base-header"
+                            onClick={toggleMenu}
                         >
-                            <svg className="hs-collapse-open:hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <svg className={`${isMenuOpen ? 'hidden' : 'block'} size-4`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <line x1="3" x2="21" y1="6" y2="6" />
                                 <line x1="3" x2="21" y1="12" y2="12" />
                                 <line x1="3" x2="21" y1="18" y2="18" />
                             </svg>
-                            <svg className="hs-collapse-open:block shrink-0 hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <svg className={`${isMenuOpen ? 'block' : 'hidden'} size-4`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 6 6 18" />
                                 <path d="m6 6 12 12" />
                             </svg>
@@ -45,7 +51,7 @@ function Header() {
                         </button>
                     </div>
                 </div>
-                <div id="hs-base-header" className="hs-collapse overflow-hidden transition-all duration-300 basis-full grow block" aria-labelledby="hs-base-header-collapse">
+                <div id="hs-base-header" className={`hs-collapse overflow-hidden transition-all duration-300 basis-full grow ${isMenuOpen ? 'block' : 'hidden'} md:block`} aria-labelledby="hs-base-header-collapse">
                     <div className="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
                         <div className="py-2 md:py-0 flex flex-col md:flex-row md:items-center md:justify-end gap-0.5 md:gap-1">
                             <a className={`p-2 flex items-center text-sm ${isScrolled ? 'text-slate-50' : 'text-slate-50'} focus:outline-none`} href="#" aria-current="page">
