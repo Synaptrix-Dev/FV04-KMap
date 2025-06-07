@@ -1,8 +1,7 @@
 import React from 'react';
-import Features from './Features'
+
 function LandingPage() {
     return (
-        <div>
             <div className="relative min-h-screen flex items-center justify-center">
                 {/* Background Video */}
                 <video
@@ -37,8 +36,6 @@ function LandingPage() {
                     </div>
                 </div>
             </div>
-            <Features></Features>
-        </div>
     );
 }
 

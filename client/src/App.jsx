@@ -2,8 +2,8 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from "react-hot-toast";
 
-import LandingPage from './pages/Home/LandingPage'
 import Header from './components/Header';
+import HomeContainer from './pages/Home/HomeContainer';
 
 //* Super Admin Routes
 import ProtectedRoute from './pages/Client/ProtectedRoute'
@@ -15,7 +15,7 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<LandingPage />} />
+        <Route path='/' element={<HomeContainer />} />
 
         <Route path="/client/dashboard" element={<ProtectedRoute Component={Layout} />}   >
           <Route index element={<Dashboard />} />

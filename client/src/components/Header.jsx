@@ -20,7 +20,7 @@ function Header() {
     }
 
     return (
-        <header className={`flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full fixed top-0 left-0 right-0 border-b border-white/10 shadow-sm transition-all duration-300 ${isScrolled ? 'bg-white/30 backdrop-blur-md' : 'bg-transparent backdrop-blur-sm'}`}>
+        <header className={`flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full fixed top-0 left-0 right-0 border-b border-white/10 shadow-sm transition-all duration-300 ${isScrolled ? 'bg-black/40 backdrop-blur-sm' : 'bg-transparent backdrop-blur-sm'}`}>
             <nav className="relative max-w-7xl w-full md:flex md:items-center md:justify-between md:gap-3 mx-auto px-4 sm:px-6 lg:px-8 py-3">
                 <div className="flex items-center justify-between">
                     <a className={`flex-none font-semibold text-xl ${isScrolled ? 'text-slate-50' : 'text-slate-50'} focus:outline-none focus:opacity-80`} href="#" aria-label="Brand">
@@ -28,13 +28,13 @@ function Header() {
                     </a>
 
                     <div className="md:hidden">
-                        <button 
-                            type="button" 
-                            className={`hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border ${isScrolled ? 'border-slate-800/50 text-slate-50' : 'border-white/50 text-slate-50'} hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none`} 
-                            id="hs-base-header-collapse" 
-                            aria-expanded={isMenuOpen} 
-                            aria-controls="hs-base-header" 
-                            aria-label="Toggle navigation" 
+                        <button
+                            type="button"
+                            className={`hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border ${isScrolled ? 'border-slate-800/50 text-slate-50' : 'border-white/50 text-slate-50'} hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none`}
+                            id="hs-base-header-collapse"
+                            aria-expanded={isMenuOpen}
+                            aria-controls="hs-base-header"
+                            aria-label="Toggle navigation"
                             data-hs-collapse="#hs-base-header"
                             onClick={toggleMenu}
                         >
