@@ -2,42 +2,64 @@ import React from 'react';
 
 function Features() {
   return (
-    <div className='max-w-7xl px-4 sm:px-4 mx-auto'>
-      <div className='text-center space-y-4 mb-12'>
-        <h1 className='text-4xl font-light'> <span className='font-bold'>Features</span> that makes us different</h1>
-        <p className='text-gray-500 text-sm font-light max-w-4xl mx-auto sm:text-xs'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nisi non nostrum rerum earum officiis explicabo ad debitis! Quaerat optio sunt ipsam tenetur sapiente nesciunt nihil, quia impedit architecto cum.</p>
-      </div>
-
-      <div className='flex flex-col sm:flex-row items-center justify-center w-full space-y-8 sm:space-y-6'>
-        <div className='space-y-4 flex flex-col items-center justify-center'>
-          <div className='bg-green-200 rounded-full w-20 h-20 flex items-center justify-center'>
-            <div className='bg-green-400 rounded-full w-16 h-16 flex items-center justify-center'>
-              <i className="fa-duotone fa-regular fa-briefcase text-3xl text-green-800"></i>
-            </div>
-          </div>
-          <h1 className='text-2xl font-semibold'>Experienced</h1>
-          <p className='text-slate-600 font-light max-w-5xl text-center sm:text-sm'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nisi non nostrum rerum earum officiis explicabo ad debitis! Quaerat optio sunt ipsam tenetur sapiente nesciunt nihil, quia impedit architecto cum.</p>
+    <div className='primColor py-12'>
+      <div className='max-w-7xl px-4 sm:px-4 mx-auto text-white'>
+        <div class="max-w-screen-md mb-8 lg:mb-16">
+          <h2 class="mb-4 text-4xl font-light"><span className='font-bold'>Features</span> that makes us different</h2>
+          <p class="text-sm">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
         </div>
 
-        <div className='space-y-4 flex flex-col items-center justify-center'>
-          <div className='bg-green-200 rounded-full w-20 h-20 flex items-center justify-center'>
-            <div className='bg-green-400 rounded-full w-16 h-16 flex items-center justify-center'>
-              <i className="fa-duotone fa-regular fa-magnifying-glass text-3xl text-green-800"></i>
+        <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+          <div>
+            <div class="flex justify-start items-center mb-4">
+              <i class="fa-light fa-calendar-lines-pen text-slate-50 text-4xl"></i>
             </div>
+            <h3 class="mb-2 text-xl font-bold dark:text-white">Daily Updated list of properties</h3>
+            <p class="text-sm">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month</p>
           </div>
-          <h1 className='text-2xl font-semibold'>Best Matches</h1>
-          <p className='text-slate-600 font-light max-w-5xl text-center sm:text-sm'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nisi non nostrum rerum earum officiis explicabo ad debitis! Quaerat optio sunt ipsam tenetur sapiente nesciunt nihil, quia impedit architecto cum.</p>
+
+          <div>
+            <div class="flex justify-start items-center mb-4">
+              <i class="fa-light fa-map-location-dot text-slate-50 text-4xl"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-bold dark:text-white">Advanced Searching  & Filteration</h3>
+            <p class="text-sm">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month</p>
+          </div>
+
+          <div>
+            <div class="flex justify-start items-center mb-4">
+              <i class="fa-light fa-bell text-slate-50 text-4xl"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-bold dark:text-white">Personalized Notifications</h3>
+            <p class="text-sm">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month</p>
+          </div>
+
+          <div>
+            <div class="flex justify-start items-center mb-4">
+              <i class="fa-light fa-house-tree text-slate-50 text-4xl"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-bold dark:text-white">Vast number of properties listed.</h3>
+            <p class="text-sm">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month</p>
+          </div>
+
+          <div>
+            <div class="flex justify-start items-center mb-4">
+              <i class="fa-light fa-briefcase text-slate-50 text-4xl"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-bold dark:text-white">Experienced</h3>
+            <p class="text-sm">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month</p>
+          </div>
+
+          <div>
+            <div class="flex justify-start items-center mb-4">
+              <i class="fa-light fa-sack-dollar text-slate-50 text-4xl"></i>
+            </div>
+            <h3 class="mb-2 text-xl font-bold dark:text-white">Competitive Prices</h3>
+            <p class="text-sm">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month</p>
+          </div>
+
         </div>
 
-        <div className='space-y-4 flex flex-col items-center justify-center'>
-          <div className='bg-green-200 rounded-full w-20 h-20 flex items-center justify-center'>
-            <div className='bg-green-400 rounded-full w-16 h-16 flex items-center justify-center'>
-              <i className="fa-duotone fa-regular fa-sack-dollar text-3xl text-green-800"></i>
-            </div>
-          </div>
-          <h1 className='text-2xl font-semibold'>Competitive Prices</h1>
-          <p className='text-slate-600 font-light max-w-5xl text-center sm:text-sm'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nisi non nostrum rerum earum officiis explicabo ad debitis! Quaerat optio sunt ipsam tenetur sapiente nesciunt nihil, quia impedit architecto cum.</p>
-        </div>
       </div>
     </div>
   );

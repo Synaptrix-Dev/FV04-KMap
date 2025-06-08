@@ -8,9 +8,9 @@ function HomeContainer() {
     return (
         <div className='space-y-16'>
             <LandingPage />
+            <AdsList />
             <Features />
             <Stats />
-            <AdsList />
         </div>
     )
 }
