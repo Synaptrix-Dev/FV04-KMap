@@ -45,11 +45,11 @@ const projectsData = [
     },
 ];
 
-function AdsList() {
+function UserAds() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const slideRefs = useRef([]);
     const timerRef = useRef(null);
-    const cardsPerRow = 3;
+    const cardsPerRow = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
     const totalSlides = Math.ceil(projectsData.length / cardsPerRow);
 
     const nextSlide = () => {
@@ -74,7 +74,6 @@ function AdsList() {
         const oldSlide = slideRefs.current[oldIndex];
         const newSlide = slideRefs.current[newIndex];
 
-        // Animate out the current slide
         gsap.to(oldSlide, {
             x: newIndex > oldIndex ? '-100%' : '100%',
             opacity: 0,
@@ -82,7 +81,6 @@ function AdsList() {
             ease: 'power2.out',
         });
 
-        // Animate in the new slide
         gsap.fromTo(
             newSlide,
             { x: newIndex > oldIndex ? '100%' : '-100%', opacity: 0 },
@@ -98,7 +96,6 @@ function AdsList() {
     };
 
     useEffect(() => {
-        // Initialize slides: only the first slide is visible
         slideRefs.current.forEach((slide, index) => {
             if (index !== 0) {
                 gsap.set(slide, { x: '100%', opacity: 0 });
@@ -107,14 +104,11 @@ function AdsList() {
             }
         });
 
-        // Start auto-slide
         resetAutoSlide();
 
-        // Cleanup interval on unmount
         return () => clearInterval(timerRef.current);
     }, []);
 
-    // Group projects into sets of 3 for each slide
     const slides = [];
     for (let i = 0; i < projectsData.length; i += cardsPerRow) {
         slides.push(projectsData.slice(i, i + cardsPerRow));
@@ -122,37 +116,24 @@ function AdsList() {
 
     return (
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
-            <div className="text-center space-y-4 mb-12">
-                <h1 className="text-4xl font-light">
-                    Available <span className="font-bold">Properties</span> for sale
+            <div className="text-center space-y-2 mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-light primText">
+                    Daily <span className="font-bold">Ads</span> for sale
                 </h1>
-                <p className="text-slate-600 font-light max-w-4xl mx-auto">
+                <p className="text-slate-600 font-light text-sm sm:text-base max-w-4xl mx-auto">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nisi non nostrum
                     rerum earum officiis explicabo ad debitis! Quaerat optio sunt ipsam tenetur sapiente
                     nesciunt nihil, quia impedit architecto cum.
                 </p>
             </div>
-            <div className='w-full flex justify-between items-center mb-6'>
-                <button
-                    onClick={prevSlide}
-                    className=" bg-slate-100 border border-slate-200 text-slate-900 h-12 w-12 rounded-full cursor-pointer"
-                >
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className=" bg-slate-100 border border-slate-200 text-slate-900 h-12 w-12 rounded-full cursor-pointer"
-                >
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
+
             <div className="relative max-w-full overflow-hidden">
-                <div className="relative h-[450px]">
+                <div className="relative h-auto min-h-[400px] sm:min-h-[450px]">
                     {slides.map((slide, slideIndex) => (
                         <div
                             key={slideIndex}
                             ref={(el) => (slideRefs.current[slideIndex] = el)}
-                            className="absolute top-0 left-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                            className="absolute top-0 left-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
                             style={{ opacity: 0 }}
                         >
                             {slide.map((project) => (
@@ -160,33 +141,34 @@ function AdsList() {
                                     key={project.code}
                                     className="flex flex-col h-full bg-white border border-gray-200 shadow-2xs rounded-xl"
                                 >
-                                    <div className="h-52 relative rounded-t-xl overflow-hidden">
+                                    <div className="h-48 sm:h-52 relative rounded-t-xl overflow-hidden">
                                         <img
                                             src={project.coverImage}
                                             alt={`${project.code} cover`}
                                             className="w-full h-full object-cover"
                                         />
-                                        <span className="absolute top-4 left-4 bg-green-600 capitalize text-white text-xs font-semibold px-2 py-1 rounded">
+                                        <span className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-green-600 capitalize text-white text-xs font-semibold px-2 py-1 rounded">
                                             {project.status}
                                         </span>
                                     </div>
-                                    <div className="p-4 md:p-6">
+                                    <div className="p-3 sm:p-4 md:p-6 flex-grow">
                                         <span className="block mb-1 text-xs font-semibold uppercase text-blue-600">
                                             {project.code}
                                         </span>
-                                        <h3 className="text-xl font-semibold text-gray-800">{project.price}</h3>
-                                        <p className="mt-3 mb-auto text-gray-500 text-sm">{project.description}</p>
+                                        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{project.price}</h3>
+                                        <p className="mt-2 sm:mt-3 text-gray-500 text-sm">{project.description}</p>
                                     </div>
                                     <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200">
                                         <Link
                                             to="#"
-                                            className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
+                                            className="w-full py-2 sm:py-3 px-3 sm:px-4 inline-flex justify-center items-center gap-x-2 text-xs sm:text-sm font-medium rounded-es-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
                                         >
                                             View Details
                                         </Link>
                                         <Link
                                             to="#"
-                                            className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
+                                            className="w-full py-2 sm:py-3 px-3 sm:px-4 inline-flex justify-center items-cente
+System: rs gap-x-2 text-xs sm:text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
                                         >
                                             Buy Now
                                         </Link>
@@ -197,8 +179,23 @@ function AdsList() {
                     ))}
                 </div>
             </div>
+
+            <div className='w-full flex justify-center space-x-6 sm:space-x-8 items-center mt-4 sm:mt-6'>
+                <button
+                    onClick={prevSlide}
+                    className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-12 sm:w-12 rounded-full cursor-pointer flex items-center justify-center"
+                >
+                    <i className="fa-solid fa-arrow-left text-sm sm:text-base"></i>
+                </button>
+                <button
+                    onClick={nextSlide}
+                    className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-12 sm:w-12 rounded-full cursor-pointer flex items-center justify-center"
+                >
+                    <i className="fa-solid fa-arrow-right text-sm sm:text-base"></i>
+                </button>
+            </div>
         </div>
     );
 }
 
-export default AdsList;
+export default UserAds;

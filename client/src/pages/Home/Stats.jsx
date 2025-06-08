@@ -2,9 +2,9 @@ import React from 'react'
 
 function Stats() {
     return (
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="w-full bg-green-50 ">
             <div
-                class="rounded-2xl py-10 px-10 xl:py-16 xl:px-20 bg-green-50 border-green-200 border flex items-center justify-between flex-col gap-16 lg:flex-row">
+                class="max-w-7xl mx-auto py-10 px-10 xl:py-16 xl:px-20 flex items-center justify-between flex-col gap-16 lg:flex-row">
                 <div class="w-full lg:w-60">
                     <h2
                         class="text-4xl font-light text-gray-900 mb-4 text-center lg:text-left"
