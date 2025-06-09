@@ -11,7 +11,7 @@ import Testimonial from './Testimonial'
 function HomeContainer() {
     return (
         <div className='space-y-16'>
-            <LandingPage />
+            {/* <LandingPage /> */}
             {/* <BulletinAds /> */}
             {/* <CourtAuctionAds /> */}
             {/* <UserAds /> */}
