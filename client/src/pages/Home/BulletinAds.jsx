@@ -49,6 +49,8 @@ function BulletinAds() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const slideRefs = useRef([]);
     const timerRef = useRef(null);
+
+    // Ensure one card per row on mobile (<640px), 2 on medium (<1024px), 3 on large
     const cardsPerRow = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
     const totalSlides = Math.ceil(projectsData.length / cardsPerRow);
 
@@ -167,8 +169,7 @@ function BulletinAds() {
                                         </Link>
                                         <Link
                                             to="#"
-                                            className="w-full py-2 sm:py-3 px-3 sm:px-4 inline-flex justify-center items-cente
-System: rs gap-x-2 text-xs sm:text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
+                                            className="w-full py-2 sm:py-3 px-3 sm:px-4 inline-flex justify-center items-center gap-x-2 text-xs sm:text-sm font-medium rounded-ee-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
                                         >
                                             Buy Now
                                         </Link>
@@ -180,7 +181,7 @@ System: rs gap-x-2 text-xs sm:text-sm font-medium rounded-ee-xl bg-white text-gr
                 </div>
             </div>
 
-            <div className='w-full flex justify-center space-x-6 sm:space-x-8 items-center mt-4 sm:mt-6'>
+            <div className="w-full flex justify-center space-x-6 sm:space-x-8 items-center mt-4 sm:mt-6">
                 <button
                     onClick={prevSlide}
                     className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-12 sm:w-12 rounded-full cursor-pointer flex items-center justify-center"
