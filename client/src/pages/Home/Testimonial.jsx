@@ -49,16 +49,27 @@ function Testimonial() {
         {
             id: 7,
             quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            name: "David Lee",
+            name: "Fernando Torres",
             title: "Operations Manager",
             avatar: Avatar,
         },
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
-    const testimonialsPerPage = 3;
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const testimonialsPerPage = isMobile ? 1 : 3;
     const maxIndex = Math.ceil(testimonials.length / testimonialsPerPage) - 1;
     const testimonialRef = useRef(null);
+
+    // Update isMobile state on window resize
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // GSAP Animation
     const animateTestimonials = (direction) => {
@@ -74,7 +85,7 @@ function Testimonial() {
                 opacity: 1,
                 duration: 0.8,
                 ease: 'power2.out',
-                stagger: 0.2,
+                stagger: isMobile ? 0 : 0.2, // No stagger for single card on mobile
             }
         );
     };

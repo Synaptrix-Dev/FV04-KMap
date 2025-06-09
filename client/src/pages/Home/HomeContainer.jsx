@@ -18,7 +18,7 @@ function HomeContainer() {
             <Features />
             <AboutUs />
             <Stats />
-            {/* <Testimonial /> */}
+            <Testimonial />
         </div>
     )
 }
