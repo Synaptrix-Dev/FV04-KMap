@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import ContactUsPage from './pages/Home/ContactUs/Container';
 import HomeContainer from './pages/Home/HomeContainer';
 import SubscriptionContainer from './pages/Home/SubscriptionPage/Container'
+import LandsSearch from './pages/Home/LandsSearch/Container'
 
 //* Super Admin Routes
 import ProtectedRoute from './pages/Client/ProtectedRoute'
@@ -21,6 +22,7 @@ function App() {
         <Route path='/' element={<HomeContainer />} />
         <Route path='/pricing-plans' element={<SubscriptionContainer />} />
         <Route path='/contact-us' element={<ContactUsPage />} />
+        <Route path='/search-lands' element={<LandsSearch />} />
 
         <Route path="/client/dashboard" element={<ProtectedRoute Component={Layout} />}   >
           <Route index element={<Dashboard />} />
