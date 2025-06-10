@@ -8,6 +8,9 @@ import ContactUsPage from './pages/Home/ContactUs/Container';
 import HomeContainer from './pages/Home/HomeContainer';
 import SubscriptionContainer from './pages/Home/SubscriptionPage/Container'
 import LandsSearch from './pages/Home/LandsSearch/Container'
+import ErrorPage from './pages/ErrorPage';
+import Register from './components/Auth/Register';
+import Login from './components/Auth/Login';
 
 //* Super Admin Routes
 import ProtectedRoute from './pages/Client/ProtectedRoute'
@@ -20,6 +23,9 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<HomeContainer />} />
+        <Route path='*' element={<ErrorPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/pricing-plans' element={<SubscriptionContainer />} />
         <Route path='/contact-us' element={<ContactUsPage />} />
         <Route path='/search-lands' element={<LandsSearch />} />
