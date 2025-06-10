@@ -1,12 +1,12 @@
 import React from 'react'
 import Hero from './Hero'
-import PricingCard from './PricingCards'
+import Form from './Form'
 
 function Container() {
   return (
     <div>
       <Hero></Hero>
-      <PricingCard></PricingCard>
+      <Form></Form>
     </div>
   )
 }

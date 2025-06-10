@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ContactUsPage from './pages/Home/ContactUs/Container';
 import HomeContainer from './pages/Home/HomeContainer';
 import SubscriptionContainer from './pages/Home/SubscriptionPage/Container'
 
@@ -19,13 +20,14 @@ function App() {
       <Routes>
         <Route path='/' element={<HomeContainer />} />
         <Route path='/pricing-plans' element={<SubscriptionContainer />} />
+        <Route path='/contact-us' element={<ContactUsPage />} />
 
         <Route path="/client/dashboard" element={<ProtectedRoute Component={Layout} />}   >
           <Route index element={<Dashboard />} />
         </Route>
 
       </Routes>
-      <Footer/>
+      <Footer />
       <Toaster position='bottom-right' />
     </>
   )

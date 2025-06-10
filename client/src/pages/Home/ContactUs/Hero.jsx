@@ -14,13 +14,13 @@ function Hero() {
         <svg xmlns="http://www.w3.org/2000/svg" width="4" height="8" viewbox="0 0 4 8" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M0.50225 0.5L0 0.98755L2.95244 4L0.0073503 7.0051L0.50225 7.5L4.00225 4L0.50225 0.5Z" fill="#19191B"></path>
         </svg>
-        <Link class="inline-block text-xs font-semibold tracking-tight bg-clip-text text-emerald-900" to="/pricing-plans">Subscriptions & Pricing</Link>
+        <Link class="inline-block text-xs font-semibold tracking-tight bg-clip-text text-emerald-900" to="/contact-us">Contact Us</Link>
       </div>
       <h1 className="relative text-emerald-900 text-4xl md:text-5xl font-bold text-center inline-block" >
-        Subscriptions & Pricing
+        Have any Queries?
       </h1>
       <p className="relative text-emerald-700 text-center">
-        Whatever your status, our offers evolve according to your needs.
+        Feel free to reach out to us with any questions or concerns you may have. We're here to help!
       </p>
     </div>
   );
