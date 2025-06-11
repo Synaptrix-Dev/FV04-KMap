@@ -18,7 +18,7 @@ function Login() {
                     </div>
 
                     <div className="space-y-4">
-                    
+
                         <div className="space-y-2">
                             <label htmlFor="email" className="text-sm font-medium text-white">
                                 Email
@@ -64,12 +64,13 @@ function Login() {
                             </a>
                         </div>
 
-                        <button
+                        <Link
+                            to='/client/dashboard'
                             type="button"
                             className="inline-flex h-10 w-full items-center justify-center rounded-md bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-emerald-700 hover:to-emerald-700 px-4 py-2 text-sm font-medium transition-colors hover:bg-slate-700"
                         >
                             Register Account
-                        </button>
+                        </Link>
                     </div>
 
                     <div className="relative my-6">

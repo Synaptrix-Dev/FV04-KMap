@@ -12,11 +12,11 @@ function HomeContainer() {
     return (
         <div className='space-y-16'>
             <LandingPage />
+            <AboutUs />
             <BulletinAds />
             <CourtAuctionAds />
             <UserAds />
             <Features />
-            <AboutUs />
             <Stats />
             {/* <Testimonial /> */}
         </div>

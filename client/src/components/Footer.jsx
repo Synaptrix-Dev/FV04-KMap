@@ -24,8 +24,14 @@ function Footer() {
                         <a href="https://pagedone.io/" className="flex justify-center lg:justify-start">
                             <img src={logo} alt="Brand Logo" className="w-52" />
                         </a>
-                        <p className="py-8 text-sm text-gray-200 lg:max-w-xs text-center lg:text-left">
+                        <p className="pt-8 text-sm text-gray-200 lg:max-w-xs text-center lg:text-left">
                             Trusted in more than 100 countries & 5 million customers. Have any query ?
+                        </p>
+                        <p className="pt-2 text-sm text-gray-200 lg:max-w-xs text-center lg:text-left">
+                            info@kmap.si
+                        </p>
+                        <p className="py-2 text-sm text-gray-200 lg:max-w-xs text-center lg:text-left">
+                          +365 123 456 7890
                         </p>
                         <a
                             href="javascript:;"
@@ -70,7 +76,7 @@ function Footer() {
                                 </a>
                             </li>
                             <li className="mb-6">
-                                <a href="javascript:;" className="text-gray-200">
+                                <a href="/" className="text-gray-200">
                                     Terms & Conditions
                                 </a>
                             </li>
