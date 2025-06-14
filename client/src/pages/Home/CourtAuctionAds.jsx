@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import gsap from 'gsap';
+import React, { useRef, useEffect, useState } from 'react';
 
 const projectsData = [
     {
@@ -45,78 +43,108 @@ const projectsData = [
     },
 ];
 
-function CourtAuctionAds() {
+function BulletinAds() {
+    const carouselRef = useRef(null);
+    const containerRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const slideRefs = useRef([]);
-    const timerRef = useRef(null);
-    const cardsPerRow = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-    const totalSlides = Math.ceil(projectsData.length / cardsPerRow);
+    const [isGsapLoaded, setIsGsapLoaded] = useState(false);
+    const [cardsPerView, setCardsPerView] = useState(3);
+
+    // Get current screen size and update cards per view
+    const updateCardsPerView = () => {
+        if (typeof window !== 'undefined') {
+            const width = window.innerWidth;
+            let newCardsPerView;
+            if (width >= 1024) {
+                newCardsPerView = 3; // lg and xl
+            } else if (width >= 768) {
+                newCardsPerView = 2; // md
+            } else {
+                newCardsPerView = 1; // sm and smaller
+            }
+            
+            if (newCardsPerView !== cardsPerView) {
+                setCardsPerView(newCardsPerView);
+                setCurrentIndex(0); // Reset to first slide on screen size change
+            }
+        }
+    };
+
+    const maxIndex = Math.max(0, projectsData.length - cardsPerView);
+
+    useEffect(() => {
+        // Set initial cards per view
+        updateCardsPerView();
+
+        // Handle window resize
+        const handleResize = () => {
+            updateCardsPerView();
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [cardsPerView]);
+
+    useEffect(() => {
+        // Load GSAP
+        const loadGSAP = () => {
+            if (window.gsap) {
+                setIsGsapLoaded(true);
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
+            script.onload = () => {
+                setIsGsapLoaded(true);
+            };
+            script.onerror = () => {
+                console.error('Failed to load GSAP');
+            };
+            document.head.appendChild(script);
+        };
+
+        loadGSAP();
+    }, []);
+
+    const slideToIndex = (index) => {
+        if (!isGsapLoaded || !carouselRef.current || !containerRef.current) return;
+
+        let targetIndex = index;
+        const currentMaxIndex = Math.max(0, projectsData.length - cardsPerView);
+
+        // Handle infinite scrolling
+        if (index > currentMaxIndex) {
+            targetIndex = 0;
+        } else if (index < 0) {
+            targetIndex = currentMaxIndex;
+        }
+
+        // Calculate translation based on container width and cards per view
+        const containerWidth = containerRef.current.offsetWidth;
+        const slideWidth = containerWidth / cardsPerView;
+        const translateX = -(targetIndex * slideWidth);
+
+        window.gsap.to(carouselRef.current, {
+            x: translateX,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+
+        setCurrentIndex(targetIndex);
+    };
 
     const nextSlide = () => {
-        setCurrentIndex((prev) => {
-            const newIndex = (prev + 1) % totalSlides;
-            animateSlides(prev, newIndex);
-            return newIndex;
-        });
-        resetAutoSlide();
+        slideToIndex(currentIndex + 1);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prev) => {
-            const newIndex = prev === 0 ? totalSlides - 1 : prev - 1;
-            animateSlides(prev, newIndex);
-            return newIndex;
-        });
-        resetAutoSlide();
+        slideToIndex(currentIndex - 1);
     };
-
-    const animateSlides = (oldIndex, newIndex) => {
-        const oldSlide = slideRefs.current[oldIndex];
-        const newSlide = slideRefs.current[newIndex];
-
-        gsap.to(oldSlide, {
-            x: newIndex > oldIndex ? '-100%' : '100%',
-            opacity: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-        });
-
-        gsap.fromTo(
-            newSlide,
-            { x: newIndex > oldIndex ? '100%' : '-100%', opacity: 0 },
-            { x: '0%', opacity: 1, duration: 0.5, ease: 'power2.out' }
-        );
-    };
-
-    const resetAutoSlide = () => {
-        if (timerRef.current) {
-            clearInterval(timerRef.current);
-        }
-        timerRef.current = setInterval(nextSlide, 3000);
-    };
-
-    useEffect(() => {
-        slideRefs.current.forEach((slide, index) => {
-            if (index !== 0) {
-                gsap.set(slide, { x: '100%', opacity: 0 });
-            } else {
-                gsap.set(slide, { x: '0%', opacity: 1 });
-            }
-        });
-
-        resetAutoSlide();
-
-        return () => clearInterval(timerRef.current);
-    }, []);
-
-    const slides = [];
-    for (let i = 0; i < projectsData.length; i += cardsPerRow) {
-        slides.push(projectsData.slice(i, i + cardsPerRow));
-    }
 
     return (
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
-            <div className="text-center space-y-2 mb-8">
+             <div className="text-center space-y-2 mb-8">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-light primText">
                     Available <span className="font-bold">Court Auction</span> Ads
                 </h1>
@@ -127,27 +155,33 @@ function CourtAuctionAds() {
                 </p>
             </div>
 
-            <div className="relative max-w-full overflow-hidden">
-                <div className="relative h-auto min-h-[400px] sm:min-h-[450px]">
-                    {slides.map((slide, slideIndex) => (
-                        <div
-                            key={slideIndex}
-                            ref={(el) => (slideRefs.current[slideIndex] = el)}
-                            className="absolute top-0 left-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-                            style={{ opacity: 0 }}
-                        >
-                            {slide.map((project) => (
-                                <div
-                                    key={project.code}
-                                    className="flex flex-col h-full bg-white border border-gray-200 shadow-2xs rounded-xl"
-                                >
+            <div className="relative">
+                {/* Carousel Container */}
+                <div 
+                    ref={containerRef}
+                    className="overflow-hidden"
+                >
+                    <div
+                        ref={carouselRef}
+                        className="flex"
+                    >
+                        {projectsData.map((project) => (
+                            <div
+                                key={project.code}
+                                className="flex-shrink-0 px-2"
+                                style={{
+                                    width: `${100 / cardsPerView}%`
+                                }}
+                            >
+                                <div className="flex flex-col h-full bg-white border border-gray-200 rounded-xl">
                                     <div className="h-48 sm:h-52 relative rounded-t-xl overflow-hidden">
                                         <img
                                             src={project.coverImage}
                                             alt={`${project.code} cover`}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                                         />
-                                        <span className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-green-600 capitalize text-white text-xs font-semibold px-2 py-1 rounded">
+                                        <span className={`absolute top-3 left-3 sm:top-4 sm:left-4 capitalize text-white text-xs font-semibold px-2 py-1 rounded ${project.status === 'sold' ? 'bg-red-600' : 'bg-green-600'
+                                            }`}>
                                             {project.status}
                                         </span>
                                     </div>
@@ -158,37 +192,59 @@ function CourtAuctionAds() {
                                         <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{project.price}</h3>
                                         <p className="mt-2 sm:mt-3 text-gray-500 text-sm">{project.description}</p>
                                     </div>
-                                    <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200">
-                                        <Link
-                                            to="#"
-                                            className="w-full py-2 sm:py-3 px-3 sm:px-4 inline-flex justify-center items-center gap-x-2 text-xs sm:text-sm font-medium rounded-b-xl bg-white text-gray-800 shadow-2xs hover:bg-gray-50"
-                                        >
+                                    <div className="mt-auto flex border-t border-gray-200">
+                                        <div className="w-full py-2 sm:py-3 px-3 sm:px-4 inline-flex justify-center items-center gap-x-2 text-xs sm:text-sm font-medium rounded-b-xl bg-white text-gray-800 hover:bg-gray-50 transition-colors duration-200 cursor-not-allowed opacity-60">
                                             View Details
-                                        </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    ))}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            <div className='w-full flex justify-center space-x-6 sm:space-x-8 items-center mt-4 sm:mt-6'>
-                <button
-                    onClick={prevSlide}
-                    className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-12 sm:w-12 rounded-full cursor-pointer flex items-center justify-center"
-                >
-                    <i className="fa-solid fa-arrow-left text-sm sm:text-base"></i>
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-12 sm:w-12 rounded-full cursor-pointer flex items-center justify-center"
-                >
-                    <i className="fa-solid fa-arrow-right text-sm sm:text-base"></i>
-                </button>
+                {/* Navigation Controls Below Cards */}
+                <div className="flex justify-center items-center gap-4 mt-8">
+                    {/* Previous Button */}
+                    <button
+                        onClick={prevSlide}
+                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        aria-label="Previous slide"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    {/* Dots Indicator */}
+                    <div className="flex gap-2">
+                        {Array.from({ length: maxIndex + 1 }, (_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => slideToIndex(index)}
+                                className={`w-2 h-2 rounded-full transition-all duration-200 focus:outline-none ${index === currentIndex
+                                        ? 'bg-blue-600 w-6'
+                                        : 'bg-gray-300 hover:bg-gray-400'
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Next Button */}
+                    <button
+                        onClick={nextSlide}
+                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        aria-label="Next slide"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     );
 }
 
-export default CourtAuctionAds;
+export default BulletinAds;

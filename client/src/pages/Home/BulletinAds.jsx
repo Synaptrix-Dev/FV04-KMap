@@ -144,8 +144,8 @@ function BulletinAds() {
 
     return (
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
-            <div className="text-center space-y-2 mb-8">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-light text-gray-900">
+             <div className="text-center space-y-2 mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-light primText">
                     Available <span className="font-bold">Bulletin</span> Ads
                 </h1>
                 <p className="text-slate-600 font-light text-sm sm:text-base max-w-4xl mx-auto">
