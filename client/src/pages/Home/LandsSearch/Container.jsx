@@ -5,7 +5,7 @@ import RealEstate from './RealEstate'
 function Container() {
     return (
         <div>
-            <Hero></Hero>
+            {/* <Hero></Hero> */}
             <RealEstate></RealEstate>
         </div>
     )
