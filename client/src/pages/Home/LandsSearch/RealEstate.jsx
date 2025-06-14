@@ -269,9 +269,9 @@ const RealEstate = () => {
       <div className="min-h-screen max-w-7xl w-full mx-auto -mt-8 z-10" >
         {/* Header */}
         <div className="border-b border-gray-200 px-4 py-4">
-         <p className="relative text-emerald-700 text-center mb-8 font-bold sm:text-start">
-          Start searching and finding your desired land from Kmap.si advanced Ai integrated Land Inventory
-        </p>
+          <p className="relative text-emerald-700 text-center mb-8 font-bold sm:text-start">
+            Start searching and finding your desired land from Kmap.si advanced Ai integrated Land Inventory
+          </p>
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-4">
             {/* Search Bar */}
             <div className="flex-1 w-full sm:max-w-md">
@@ -419,7 +419,7 @@ const RealEstate = () => {
           {/* Right Panel - OpenStreetMap */}
           <div className={`w-full lg:w-1/2 h-[calc(100vh-144px)] lg:h-screen relative ${activeView === 'map' ? 'block' : 'hidden lg:block'}`}>
             <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-74.4%2C40.7%2C-74.1%2C40.9&layer=mapnik&marker=40.8%2C-74.25"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12096.332!2d-74.25!3d40.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ4JzAwLjAiTiA3NMKwMTUnMDAuMCJX!5e1!3m2!1sen!2sus!4v1634567890123!5m2!1sen!2sus"
               width="100%"
               height="100%"
               style={{ border: 0 }}
