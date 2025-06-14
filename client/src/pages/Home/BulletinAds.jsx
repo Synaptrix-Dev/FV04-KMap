@@ -45,20 +45,27 @@ const projectsData = [
 
 function BulletinAds() {
     const carouselRef = useRef(null);
+    const containerRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isGsapLoaded, setIsGsapLoaded] = useState(false);
     const [cardsPerView, setCardsPerView] = useState(3);
 
-    // Determine cards per view based on screen size
+    // Get current screen size and update cards per view
     const updateCardsPerView = () => {
         if (typeof window !== 'undefined') {
             const width = window.innerWidth;
+            let newCardsPerView;
             if (width >= 1024) {
-                setCardsPerView(3); // lg and xl
+                newCardsPerView = 3; // lg and xl
             } else if (width >= 768) {
-                setCardsPerView(2); // md
+                newCardsPerView = 2; // md
             } else {
-                setCardsPerView(1); // sm and smaller
+                newCardsPerView = 1; // sm and smaller
+            }
+            
+            if (newCardsPerView !== cardsPerView) {
+                setCardsPerView(newCardsPerView);
+                setCurrentIndex(0); // Reset to first slide on screen size change
             }
         }
     };
@@ -72,11 +79,6 @@ function BulletinAds() {
         // Handle window resize
         const handleResize = () => {
             updateCardsPerView();
-            // Reset to valid index if current index is out of bounds
-            setCurrentIndex(prev => {
-                const newMaxIndex = Math.max(0, projectsData.length - cardsPerView);
-                return prev > newMaxIndex ? 0 : prev;
-            });
         };
 
         window.addEventListener('resize', handleResize);
@@ -106,7 +108,7 @@ function BulletinAds() {
     }, []);
 
     const slideToIndex = (index) => {
-        if (!isGsapLoaded || !carouselRef.current) return;
+        if (!isGsapLoaded || !carouselRef.current || !containerRef.current) return;
 
         let targetIndex = index;
         const currentMaxIndex = Math.max(0, projectsData.length - cardsPerView);
@@ -118,14 +120,14 @@ function BulletinAds() {
             targetIndex = currentMaxIndex;
         }
 
-        // Calculate the exact pixel offset based on card width + gap
-        const cardWidth = carouselRef.current.children[0]?.offsetWidth || 0;
-        const gap = 16; // 1rem = 16px gap
-        const translateX = -(targetIndex * (cardWidth + gap));
+        // Calculate translation based on container width and cards per view
+        const containerWidth = containerRef.current.offsetWidth;
+        const slideWidth = containerWidth / cardsPerView;
+        const translateX = -(targetIndex * slideWidth);
 
         window.gsap.to(carouselRef.current, {
             x: translateX,
-            duration: 0.5,
+            duration: 0.4,
             ease: "power2.out"
         });
 
@@ -155,17 +157,23 @@ function BulletinAds() {
 
             <div className="relative">
                 {/* Carousel Container */}
-                <div className="overflow-hidden">
+                <div 
+                    ref={containerRef}
+                    className="overflow-hidden"
+                >
                     <div
                         ref={carouselRef}
-                        className="flex gap-1"
+                        className="flex"
                     >
                         {projectsData.map((project) => (
                             <div
                                 key={project.code}
-                                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3"
+                                className="flex-shrink-0 px-2"
+                                style={{
+                                    width: `${100 / cardsPerView}%`
+                                }}
                             >
-                                <div className="flex flex-col w-[96%] h-full bg-white border border-gray-200 rounded-xl">
+                                <div className="flex flex-col h-full bg-white border border-gray-200 rounded-xl">
                                     <div className="h-48 sm:h-52 relative rounded-t-xl overflow-hidden">
                                         <img
                                             src={project.coverImage}
@@ -196,23 +204,42 @@ function BulletinAds() {
                 </div>
 
                 {/* Navigation Controls Below Cards */}
-                <div className="flex justify-center items-center gap-2 mt-8">
+                <div className="flex justify-center items-center gap-4 mt-8">
                     {/* Previous Button */}
                     <button
                         onClick={prevSlide}
-                         className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center"
+                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         aria-label="Previous slide"
                     >
-                         <i className="fa-solid fa-arrow-left text-sm sm:text-base"></i>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
                     </button>
+
+                    {/* Dots Indicator */}
+                    <div className="flex gap-2">
+                        {Array.from({ length: maxIndex + 1 }, (_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => slideToIndex(index)}
+                                className={`w-2 h-2 rounded-full transition-all duration-200 focus:outline-none ${index === currentIndex
+                                        ? 'bg-blue-600 w-6'
+                                        : 'bg-gray-300 hover:bg-gray-400'
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
 
                     {/* Next Button */}
                     <button
                         onClick={nextSlide}
-                           className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center"
+                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         aria-label="Next slide"
                     >
-                         <i className="fa-solid fa-arrow-right text-sm sm:text-base"></i>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
                     </button>
                 </div>
             </div>
