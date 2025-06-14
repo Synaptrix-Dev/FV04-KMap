@@ -26,7 +26,7 @@ function Stats() {
                                 260+
                             </div>
                             <span class="text-gray-900 text-center block lg:text-left"
-                            >Expert Consultants
+                            >Active Users
                             </span>
                         </div>
                         <div class="block">
@@ -36,7 +36,7 @@ function Stats() {
                                 975+
                             </div>
                             <span class="text-gray-900 text-center block lg:text-left"
-                            >Active Clients
+                            >Active Ads
                             </span>
                         </div>
                         <div class="block">
@@ -46,7 +46,7 @@ function Stats() {
                                 724+
                             </div>
                             <span class="text-gray-900 text-center block lg:text-left"
-                            >Projects Delivered</span
+                            >Ads Successfull</span
                             >
                         </div>
                         <div class="block">
@@ -56,7 +56,7 @@ function Stats() {
                                 89+
                             </div>
                             <span class="text-gray-900 text-center block lg:text-left"
-                            >Orders in Queue</span
+                            >Ads in Planning</span
                             >
                         </div>
                     </div>

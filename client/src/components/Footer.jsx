@@ -31,7 +31,7 @@ function Footer() {
                             info@kmap.si
                         </p>
                         <p className="py-2 text-sm text-gray-200 lg:max-w-xs text-center lg:text-left">
-                          +365 123 456 7890
+                            +365 123 456 7890
                         </p>
                         <a
                             href="javascript:;"
