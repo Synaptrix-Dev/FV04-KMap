@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../assets/logoWhite.png";
 import { Link } from "react-router-dom";
-import aboutBg from "../../assets/about.avif";
+import aboutBg from "../../assets/about.jpg";
 
 function SignIn() {
     return (
