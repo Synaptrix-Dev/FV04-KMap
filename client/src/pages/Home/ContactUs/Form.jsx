@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Form() {
     return (
-        <div className="max-w-7xl mx-auto px-8 sm:px-24 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-24 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16">
             {/* <!-- Card --> */}
             <div className="flex flex-col border border-slate-200 rounded-xl p-4 sm:p-6 lg:p-8">
                 <h2 className="mb-6 sm:mb-8 text-lg sm:text-xl font-semibold text-gray-800 ">

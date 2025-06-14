@@ -16,10 +16,10 @@ function Hero() {
         </svg>
         <Link class="inline-block text-xs font-semibold tracking-tight bg-clip-text text-emerald-900" to="/contact-us">Contact Us</Link>
       </div>
-      <h1 className="relative text-emerald-900 text-4xl md:text-5xl font-bold text-center inline-block" >
+      <h1 className="relative text-emerald-900 text-4xl md:text-5xl font-bold text-center inline-block px-4 sm:px-0" >
         Have any Queries?
       </h1>
-      <p className="relative text-emerald-700 text-center">
+      <p className="relative text-emerald-700 text-center px-4 sm:px-0">
         Feel free to reach out to us with any questions or concerns you may have. We're here to help!
       </p>
     </div>
