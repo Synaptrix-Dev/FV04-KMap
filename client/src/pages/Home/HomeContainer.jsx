@@ -7,6 +7,7 @@ import CourtAuctionAds from './CourtAuctionAds'
 import UserAds from './UserAds'
 import AboutUs from './AboutUs'
 import Testimonial from './Testimonial'
+import MoneyBack from './MoneyBack'
 
 function HomeContainer() {
     return (
@@ -18,6 +19,7 @@ function HomeContainer() {
             <UserAds />
             <Features />
             <Stats />
+            <MoneyBack />
             {/* <Testimonial /> */}
         </div>
     )

@@ -186,7 +186,7 @@ function BulletinAds() {
                                         </span>
                                     </div>
                                     <div className="p-3 sm:p-4 md:p-6 flex-grow">
-                                        <span className="block mb-1 text-xs font-semibold uppercase text-blue-600">
+                                        <span className="block mb-1 text-xs font-semibold uppercase text-green-600">
                                             {project.code}
                                         </span>
                                         <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{project.price}</h3>
@@ -208,7 +208,7 @@ function BulletinAds() {
                     {/* Previous Button */}
                     <button
                         onClick={prevSlide}
-                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                         aria-label="Previous slide"
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -223,7 +223,7 @@ function BulletinAds() {
                                 key={index}
                                 onClick={() => slideToIndex(index)}
                                 className={`w-2 h-2 rounded-full transition-all duration-200 focus:outline-none ${index === currentIndex
-                                        ? 'bg-blue-600 w-6'
+                                        ? 'bg-green-600 w-6'
                                         : 'bg-gray-300 hover:bg-gray-400'
                                     }`}
                                 aria-label={`Go to slide ${index + 1}`}
@@ -234,7 +234,7 @@ function BulletinAds() {
                     {/* Next Button */}
                     <button
                         onClick={nextSlide}
-                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        className="bg-slate-100 border border-slate-200 text-slate-900 h-10 w-10 sm:h-10 sm:w-10 rounded-full cursor-pointer flex items-center justify-center hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                         aria-label="Next slide"
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
