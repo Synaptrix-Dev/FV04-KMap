@@ -258,7 +258,7 @@ const RealEstate = () => {
   };
 
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col w-full h-screen overflow-hidden'>
       <div
         className="relative h-[20vh] primColor flex flex-col space-y-4 items-start justify-center"
         style={{
@@ -266,15 +266,12 @@ const RealEstate = () => {
         }}
       >
       </div>
-      <div className="min-h-screen max-w-7xl w-full mx-auto -mt-8 z-10" >
+      <div className="w-full mx-auto -mt-14 z-10 flex flex-col h-[calc(100vh-20vh)]">
         {/* Header */}
         <div className="border-b border-gray-200 px-4 py-4">
-          <p className="relative text-emerald-700 text-center mb-8 font-bold sm:text-start">
-            Start searching and finding your desired land from Kmap.si advanced Ai integrated Land Inventory
-          </p>
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-4">
+          <div className="w-full mx-auto flex flex-col sm:flex-row items-center gap-4">
             {/* Search Bar */}
-            <div className="flex-1 w-full sm:max-w-md">
+            <div className="flex-1 w-full">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -321,9 +318,9 @@ const RealEstate = () => {
         </div>
 
         {/* Main Content */}
-        <div className="lg:flex">
+        <div className="lg:flex h-[calc(100vh-20vh-72px)]">
           {/* Left Panel - Listings */}
-          <div className={`w-full lg:w-1/2 h-[calc(100vh-144px)] lg:h-screen overflow-y-auto ${activeView === 'list' ? 'block' : 'hidden lg:block'}`}>
+          <div className={`w-full lg:w-1/2 h-full overflow-y-auto ${activeView === 'list' ? 'block' : 'hidden lg:block'}`}>
             <div className="p-4 sm:p-6">
               <div className="flex flex-col sm:flex-row items-center justify-between mb-4 sm:mb-6">
                 <div className="text-center sm:text-left">
@@ -417,7 +414,7 @@ const RealEstate = () => {
           </div>
 
           {/* Right Panel - OpenStreetMap */}
-          <div className={`w-full lg:w-1/2 h-[calc(100vh-144px)] lg:h-screen relative ${activeView === 'map' ? 'block' : 'hidden lg:block'}`}>
+          <div className={`w-full lg:w-1/2 h-full relative ${activeView === 'map' ? 'block' : 'hidden lg:block'}`}>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12096.332!2d-74.25!3d40.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ4JzAwLjAiTiA3NMKwMTUnMDAuMCJX!5e1!3m2!1sen!2sus!4v1634567890123!5m2!1sen!2sus"
               width="100%"

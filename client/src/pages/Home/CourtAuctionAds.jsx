@@ -146,7 +146,7 @@ function BulletinAds() {
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
              <div className="text-center space-y-2 mb-8">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-light primText">
-                    Available <span className="font-bold">Court Auction</span> Ads
+                    Last Added <span className="font-bold">Court Auction</span> Ads
                 </h1>
                 <p className="text-slate-600 font-light text-sm sm:text-base max-w-4xl mx-auto">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nisi non nostrum

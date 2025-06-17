@@ -6,7 +6,7 @@ function Footer() {
     const location = useLocation(); // Get current route
 
     // Define the routes where the footer should be visible
-    const visibleRoutes = ['/', '/pricing-plans', '/search-lands', '/contact-us'];
+    const visibleRoutes = ['/', '/pricing-plans', '/contact-us'];
 
     // Check if the current route is one of the visible routes
     const shouldShowFooter = visibleRoutes.includes(location.pathname);

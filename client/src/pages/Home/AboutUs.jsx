@@ -70,7 +70,7 @@ function AboutUs() {
 
         return nextIndex;
       });
-    }, 1000); // Change image every 1 second
+    }, 3000); // Change image every 1 second
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [images.length]);
@@ -129,7 +129,7 @@ function AboutUs() {
       </div>
       <div
         ref={sliderRef}
-        className="w-full h-96 relative overflow-hidden rounded-xl"
+        className="w-full h-96 mt-8 relative overflow-hidden rounded-xl"
         style={{ minHeight: '300px' }}
       >
         {images.length > 0 ? (
